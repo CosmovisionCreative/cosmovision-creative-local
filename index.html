@@ -107,7 +107,7 @@
         box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
       }
       50% {
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
                     0 0 30px rgba(173, 216, 230, 0.4),
                     0 0 40px rgba(255, 255, 255, 0.3);
       }
@@ -163,10 +163,10 @@
       const iframe = document.querySelector('.video-background iframe');
       const overlay = document.querySelector('.overlay');
       
-      // Delay video fade-in by 2 seconds
+      // Delay video fade-in by 3 seconds to preserve first frame
       setTimeout(() => {
         iframe.style.opacity = 1;
-      }, 2000);
+      }, 3000); // Increased delay to 3s
 
       // Fade in overlay content
       setTimeout(() => {
