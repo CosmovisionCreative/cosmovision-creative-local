@@ -50,8 +50,6 @@
       text-align: center;
       color: white;
       padding: 2rem;
-      opacity: 0;
-      transition: opacity 2s ease;
     }
 
     img.logo {
@@ -79,18 +77,17 @@
 
     .cta-link {
       position: relative;
-      display: inline-block;
       font-size: 1.1rem;
       color: #fff;
       text-decoration: none;
       border: 1px solid rgba(255, 255, 255, 0.4);
       padding: 0.6rem 1.2rem;
       border-radius: 8px;
-      transition: all 0.5s ease;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
-      background-color: rgba(255, 255, 255, 0.1);
       font-weight: normal;
       overflow: hidden;
+      background-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+      transition: all 0.5s ease;
     }
 
     .cta-link::before {
@@ -100,13 +97,26 @@
       left: -75%;
       width: 50%;
       height: 100%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.6),
+        transparent
+      );
       transform: skewX(-20deg);
-      transition: left 0.7s ease-in-out;
     }
 
     .cta-link:hover::before {
-      left: 125%;
+      animation: sheen 1.8s ease-in-out forwards;
+    }
+
+    @keyframes sheen {
+      0% {
+        left: -75%;
+      }
+      100% {
+        left: 125%;
+      }
     }
 
     .cta-link:hover {
@@ -114,6 +124,7 @@
       color: #000;
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
     }
+
   </style>
 </head>
 
@@ -141,17 +152,9 @@
   <script>
     window.addEventListener("load", () => {
       const iframe = document.querySelector('.video-background iframe');
-      const overlay = document.querySelector('.overlay');
-      
-      // Delay video fade-in by 2 seconds
       setTimeout(() => {
         iframe.style.opacity = 1;
-      }, 2000);
-
-      // Fade in overlay content
-      setTimeout(() => {
-        overlay.style.opacity = 1;
-      }, 1000);
+      }, 2000); // Delay fade-in for 2 seconds
     });
   </script>
 
