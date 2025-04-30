@@ -176,15 +176,12 @@
       const iframe = document.querySelector('.video-background iframe');
       const overlay = document.querySelector('.overlay');
 
-      // Step 1: Show preview still immediately
       preview.style.opacity = 1;
 
-      // Step 2: Show overlay content
       setTimeout(() => {
         overlay.style.opacity = 1;
       }, 800);
 
-      // Step 3: After 3 seconds, fade out preview, fade in video
       setTimeout(() => {
         preview.style.opacity = 0;
         iframe.style.opacity = 1;
