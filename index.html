@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+i re-deployed, but it is choppy now - can you start with this code from v41 again and instead of loading the video faster, please replace the white background with preview-frame.jpeg. call this next one v43. Start with this code: <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -34,7 +34,20 @@
       transform: translate(-50%, -50%);
       pointer-events: none;
       opacity: 0;
-      transition: opacity 0.8s ease-in-out;
+      transition: opacity 1s ease-in-out;
+    }
+
+    /* Preview Image */
+    .preview-frame {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 1;
+      transition: opacity 1.5s ease-in-out;
     }
 
     .overlay {
@@ -114,44 +127,15 @@
       color: #000;
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
     }
-
-    .cta-link::after {
-      content: '';
-      position: absolute;
-      top: -6px;
-      left: -6px;
-      width: calc(100% + 12px);
-      height: calc(100% + 12px);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .cta-link:hover::after {
-      opacity: 1;
-      animation: stargate 1.5s infinite;
-    }
-
-    @keyframes stargate {
-      0% {
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-      }
-      50% {
-        transform: scale(1.2);
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-      }
-    }
   </style>
 </head>
 
 <body>
 
+  <!-- Preview Frame -->
+  <img src="preview-frame.jpeg" alt="Preview Frame" class="preview-frame" />
+
+  <!-- Fullscreen Vimeo Background with Lazy Loading -->
   <div class="video-background">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
@@ -172,18 +156,20 @@
 
   <script>
     window.addEventListener("load", () => {
+      const preview = document.querySelector('.preview-frame');
       const iframe = document.querySelector('.video-background iframe');
       const overlay = document.querySelector('.overlay');
-      
-      // Faster fade-in for video: 800ms instead of 2000ms
+
+      // Delay video fade-in by 2 seconds
       setTimeout(() => {
         iframe.style.opacity = 1;
-      }, 800);
+        preview.style.opacity = 0;
+      }, 2000); // fade in video + fade out preview after 2s
 
-      // Overlay still fades in after 1s
+      // Fade in overlay content
       setTimeout(() => {
         overlay.style.opacity = 1;
-      }, 1000);
+      }, 1000); // fade in text earlier
     });
   </script>
 
