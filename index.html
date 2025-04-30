@@ -100,19 +100,24 @@
       left: -75%;
       width: 50%;
       height: 100%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+      background: linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0));
       transform: skewX(-20deg);
-      transition: left 0.7s ease-in-out;
-    }
-
-    .cta-link:hover::before {
-      left: 125%;
+      animation: shimmer 2.5s infinite;
     }
 
     .cta-link:hover {
       background-color: rgba(255, 255, 255, 0.3);
       color: #000;
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -75%;
+      }
+      100% {
+        left: 125%;
+      }
     }
   </style>
 </head>
