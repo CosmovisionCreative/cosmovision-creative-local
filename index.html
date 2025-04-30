@@ -13,6 +13,7 @@
       height: 100%;
       overflow: hidden;
       font-family: 'Poppins', sans-serif;
+      background-color: #000; /* Match video background color */
     }
 
     .video-background {
@@ -33,6 +34,8 @@
       height: 100vh;
       transform: translate(-50%, -50%);
       pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
     }
 
     .overlay {
@@ -123,6 +126,8 @@
       background-color: rgba(255, 255, 255, 0.25);
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
     }
+
+    /* No preloader styles required anymore */
   </style>
 </head>
 
@@ -131,18 +136,3 @@
   <div class="video-background">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
-      frameborder="0" 
-      allow="autoplay; fullscreen" 
-      allowfullscreen 
-      title="Golden Gates Looped">
-    </iframe>
-  </div>
-
-  <div class="overlay">
-    <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
-    <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
-    <p class="subheadline">Guiding sacred entrepreneurs from vision to launch.</p>
-    <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link">✨ Enter the Stargate ✨</a>
-  </div>
-</body>
-</html>
