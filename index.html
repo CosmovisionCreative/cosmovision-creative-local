@@ -21,7 +21,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -2;
+      z-index: -1;
       overflow: hidden;
     }
 
@@ -37,6 +37,7 @@
       transition: opacity 1s ease-in-out;
     }
 
+    /* Preview Image */
     .preview-frame {
       position: fixed;
       top: 0;
@@ -44,8 +45,8 @@
       width: 100vw;
       height: 100vh;
       object-fit: cover;
-      z-index: -1;
-      opacity: 0;
+      z-index: -2;
+      opacity: 1;
       transition: opacity 1.5s ease-in-out;
     }
 
@@ -93,32 +94,16 @@
       position: relative;
       display: inline-block;
       font-size: 1.1rem;
-      font-weight: normal;
       color: #fff;
       text-decoration: none;
       border: 1px solid rgba(255, 255, 255, 0.4);
       padding: 0.6rem 1.2rem;
       border-radius: 8px;
-      background-color: rgba(255, 255, 255, 0.1);
-      overflow: hidden;
+      transition: all 0.5s ease;
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
-      animation: shimmer 3s infinite, sparkle 5s infinite;
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -100% 0; }
-      100% { background-position: 200% 0; }
-    }
-
-    @keyframes sparkle {
-      0%, 100% {
-        box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
-      }
-      50% {
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
-                    0 0 30px rgba(173, 216, 230, 0.4),
-                    0 0 40px rgba(255, 255, 255, 0.3);
-      }
+      background-color: rgba(255, 255, 255, 0.1);
+      font-weight: normal;
+      overflow: hidden;
     }
 
     .cta-link::before {
@@ -147,10 +132,10 @@
 
 <body>
 
-  <!-- Still frame preview image -->
-  <img src="preview-frame.jpeg" alt="Video Preview" class="preview-frame" />
+  <!-- Preview Frame -->
+  <img src="preview-frame.jpeg" alt="Preview Frame" class="preview-frame" />
 
-  <!-- Fullscreen Vimeo Background -->
+  <!-- Fullscreen Vimeo Background with Lazy Loading -->
   <div class="video-background">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
@@ -162,7 +147,6 @@
     </iframe>
   </div>
 
-  <!-- Overlay Content -->
   <div class="overlay">
     <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
     <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
@@ -176,16 +160,16 @@
       const iframe = document.querySelector('.video-background iframe');
       const overlay = document.querySelector('.overlay');
 
-      preview.style.opacity = 1;
+      // Delay video fade-in by 2 seconds
+      setTimeout(() => {
+        iframe.style.opacity = 1;
+        preview.style.opacity = 0;
+      }, 2000); // fade in video + fade out preview after 2s
 
+      // Fade in overlay content
       setTimeout(() => {
         overlay.style.opacity = 1;
-      }, 800);
-
-      setTimeout(() => {
-        preview.style.opacity = 0;
-        iframe.style.opacity = 1;
-      }, 3000);
+      }, 1000); // fade in text earlier
     });
   </script>
 
