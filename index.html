@@ -37,19 +37,6 @@
       transition: opacity 1s ease-in-out;
     }
 
-    /* Preview Image */
-    .preview-frame {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -2;
-      opacity: 1;
-      transition: opacity 1.5s ease-in-out;
-    }
-
     .overlay {
       position: relative;
       z-index: 1;
@@ -132,9 +119,6 @@
 
 <body>
 
-  <!-- Preview Frame -->
-  <img src="preview-frame.jpeg" alt="Preview Frame" class="preview-frame" />
-
   <!-- Fullscreen Vimeo Background with Lazy Loading -->
   <div class="video-background">
     <iframe 
@@ -156,20 +140,18 @@
 
   <script>
     window.addEventListener("load", () => {
-      const preview = document.querySelector('.preview-frame');
       const iframe = document.querySelector('.video-background iframe');
       const overlay = document.querySelector('.overlay');
-
+      
       // Delay video fade-in by 2 seconds
       setTimeout(() => {
         iframe.style.opacity = 1;
-        preview.style.opacity = 0;
-      }, 2000); // fade in video + fade out preview after 2s
+      }, 2000);
 
       // Fade in overlay content
       setTimeout(() => {
         overlay.style.opacity = 1;
-      }, 1000); // fade in text earlier
+      }, 1000);
     });
   </script>
 
