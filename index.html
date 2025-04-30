@@ -1,4 +1,4 @@
-i re-deployed, but it is choppy now - can you start with this code from v41 again and instead of loading the video faster, please replace the white background with preview-frame.jpeg. call this next one v43. Start with this code: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -37,7 +37,6 @@ i re-deployed, but it is choppy now - can you start with this code from v41 agai
       transition: opacity 1s ease-in-out;
     }
 
-    /* Preview Image */
     .preview-frame {
       position: fixed;
       top: 0;
@@ -132,10 +131,8 @@ i re-deployed, but it is choppy now - can you start with this code from v41 agai
 
 <body>
 
-  <!-- Preview Frame -->
   <img src="preview-frame.jpeg" alt="Preview Frame" class="preview-frame" />
 
-  <!-- Fullscreen Vimeo Background with Lazy Loading -->
   <div class="video-background">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
@@ -160,16 +157,14 @@ i re-deployed, but it is choppy now - can you start with this code from v41 agai
       const iframe = document.querySelector('.video-background iframe');
       const overlay = document.querySelector('.overlay');
 
-      // Delay video fade-in by 2 seconds
       setTimeout(() => {
         iframe.style.opacity = 1;
         preview.style.opacity = 0;
-      }, 2000); // fade in video + fade out preview after 2s
+      }, 2000);
 
-      // Fade in overlay content
       setTimeout(() => {
         overlay.style.opacity = 1;
-      }, 1000); // fade in text earlier
+      }, 1000);
     });
   </script>
 
