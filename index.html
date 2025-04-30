@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cosmovision Creative</title>
   <link rel="icon" href="favicon.png" type="image/png" />
-
+  
   <style>
     html, body {
       margin: 0;
@@ -22,7 +22,12 @@
       width: 100vw;
       height: 100vh;
       z-index: -1;
-      overflow: hidden;
+      background-image: url('preview-frame.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
     }
 
     .video-background iframe {
@@ -119,15 +124,14 @@
 
 <body>
 
-  <!-- Fullscreen Vimeo Background with Lazy Loading -->
+  <!-- Fullscreen Vimeo Background with Lazy Loading Removed -->
   <div class="video-background">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
       frameborder="0" 
       allow="autoplay; fullscreen" 
       allowfullscreen 
-      title="Golden Gates Looped" 
-      loading="lazy">
+      title="Golden Gates Looped">
     </iframe>
   </div>
 
