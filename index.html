@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cosmovision Creative</title>
   <link rel="icon" href="favicon.png" type="image/png" />
-
+  
   <style>
     html, body {
       margin: 0;
@@ -22,7 +22,12 @@
       width: 100vw;
       height: 100vh;
       z-index: -1;
-      overflow: hidden;
+      background-image: url('preview-frame.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
     }
 
     .video-background iframe {
@@ -35,18 +40,6 @@
       pointer-events: none;
       opacity: 0;
       transition: opacity 1s ease-in-out;
-    }
-
-    .preview-frame {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -2;
-      opacity: 1;
-      transition: opacity 1.5s ease-in-out;
     }
 
     .overlay {
@@ -101,7 +94,7 @@
       transition: all 0.5s ease;
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
       background-color: rgba(255, 255, 255, 0.1);
-      font-weight: normal;
+      font-weight: normal;  /* Ensure the font weight is normal */
       overflow: hidden;
     }
 
@@ -131,16 +124,14 @@
 
 <body>
 
-  <img src="preview-frame.jpeg" alt="Preview Frame" class="preview-frame" />
-
+  <!-- Fullscreen Vimeo Background with Lazy Loading Removed -->
   <div class="video-background">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
       frameborder="0" 
       allow="autoplay; fullscreen" 
       allowfullscreen 
-      title="Golden Gates Looped" 
-      loading="lazy">
+      title="Golden Gates Looped">
     </iframe>
   </div>
 
@@ -153,15 +144,15 @@
 
   <script>
     window.addEventListener("load", () => {
-      const preview = document.querySelector('.preview-frame');
       const iframe = document.querySelector('.video-background iframe');
       const overlay = document.querySelector('.overlay');
-
+      
+      // Delay video fade-in by 2 seconds
       setTimeout(() => {
         iframe.style.opacity = 1;
-        preview.style.opacity = 0;
       }, 2000);
 
+      // Fade in overlay content
       setTimeout(() => {
         overlay.style.opacity = 1;
       }, 1000);
