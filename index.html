@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cosmovision Creative</title>
-  <link rel="icon" href="flavicon.png" type="image/png" />
+  <link rel="icon" href="favicon.png" type="image/png" />
 
   <style>
     html, body {
@@ -13,6 +13,7 @@
       height: 100%;
       overflow: hidden;
       font-family: 'Poppins', sans-serif;
+      background: black;
     }
 
     .video-background {
@@ -21,7 +22,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -1;
+      z-index: -2;
       overflow: hidden;
     }
 
@@ -29,11 +30,26 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 177.78vh; /* 100 * (16 / 9) = 177.78 */
+      width: 177.78vh;
       height: 100vh;
       transform: translate(-50%, -50%);
       pointer-events: none;
-      opacity: 0; /* Set initial opacity for fade-in effect */
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .video-preview {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      background-image: url('preview-frame.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      opacity: 1;
       transition: opacity 1s ease-in-out;
     }
 
@@ -51,6 +67,27 @@
       color: white;
       padding: 2rem;
     }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .fade-in.delay-1 { animation-delay: 0.5s; }
+    .fade-in.delay-2 { animation-delay: 1s; }
+    .fade-in.delay-3 { animation-delay: 1.5s; }
+    .fade-in.delay-4 { animation-delay: 2s; }
 
     img.logo {
       width: 120px;
@@ -82,10 +119,10 @@
       border: 1px solid rgba(255, 255, 255, 0.4);
       padding: 0.6rem 1.2rem;
       border-radius: 8px;
-      transition: all 0.5s ease; /* Slower transition for glint effect */
+      transition: all 0.5s ease;
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
       background-color: rgba(255, 255, 255, 0.1);
-      font-weight: normal; /* Non-bold font weight */
+      font-weight: normal;
     }
 
     .cta-link:hover {
@@ -93,14 +130,13 @@
       color: #000;
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
     }
-
   </style>
-
 </head>
 
 <body>
 
-  <!-- Fullscreen Vimeo Background with Lazy Loading -->
+  <div class="video-preview" id="videoPreview"></div>
+
   <div class="video-background">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
@@ -113,16 +149,20 @@
   </div>
 
   <div class="overlay">
-    <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
-    <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
-    <p class="subheadline">Guiding sacred entrepreneurs from vision to launch.</p>
-    <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link">✨ Enter the Stargate ✨</a>
+    <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo fade-in delay-1" />
+    <h1 class="headline fade-in delay-2">A venture studio where sacred visions blossom into soulful enterprises.</h1>
+    <p class="subheadline fade-in delay-3">Guiding sacred entrepreneurs from vision to launch.</p>
+    <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link fade-in delay-4">✨ Enter the Stargate ✨</a>
   </div>
 
   <script>
     window.addEventListener("load", () => {
       const iframe = document.querySelector('.video-background iframe');
-      iframe.style.opacity = 1; // Fade in the iframe when the page is loaded
+      const preview = document.getElementById('videoPreview');
+
+      iframe.style.opacity = 1;
+      preview.style.opacity = 0;
+      setTimeout(() => preview.style.display = 'none', 1000);
     });
   </script>
 
