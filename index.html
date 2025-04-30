@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cosmovision Creative</title>
-  <link rel="icon" href="flavicon.png" type="image/png" />
+  <link rel="icon" href="favicon.png" type="image/png" />
 
   <style>
     html, body {
@@ -38,4 +38,105 @@
     }
 
     .overlay {
-      pos
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity 2s ease;
+    }
+
+    img.logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+    }
+
+    h1.headline {
+      font-size: 2.2rem;
+      font-weight: 500;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                   0 0 20px rgba(173, 216, 230, 0.3);
+      margin-bottom: 1rem;
+    }
+
+    p.subheadline {
+      font-size: 1.2rem;
+      font-weight: 300;
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+      margin-bottom: 2rem;
+    }
+
+    .
+    .cta-link {
+      font-size: 1.1rem;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      transition: all 0.5s ease; /* Slower transition for glint effect */
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.1);
+      font-weight: normal; /* Non-bold font weight */
+    }
+
+    .cta-link:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: #000;
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Fullscreen Vimeo Background with Lazy Loading -->
+  <div class="video-background">
+    <iframe 
+      src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
+      frameborder="0" 
+      allow="autoplay; fullscreen" 
+      allowfullscreen 
+      title="Golden Gates Looped" 
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <div class="overlay">
+    <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
+    <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
+    <p class="subheadline">Guiding sacred entrepreneurs from vision to launch.</p>
+    <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link">✨ Enter the Stargate ✨</a>
+  </div>
+
+  <script>
+    window.addEventListener("load", () => {
+      const iframe = document.querySelector('.video-background iframe');
+      const overlay = document.querySelector('.overlay');
+      
+      // Delay video fade-in by 2 seconds
+      setTimeout(() => {
+        iframe.style.opacity = 1;
+      }, 2000);
+
+      // Fade in overlay content
+      setTimeout(() => {
+        overlay.style.opacity = 1;
+      }, 1000);
+    });
+  </script>
+
+</body>
+</html>
