@@ -19,14 +19,20 @@
       overflow: hidden;
     }
 
-    .video-background iframe {
-      position: fixed;
+    /* Video container to ensure it fills the entire screen */
+    .video-container {
+      position: relative;
+      height: 0;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      overflow: hidden;
+    }
+
+    .video-container iframe {
+      position: absolute;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      pointer-events: none;
+      width: 100%;
+      height: 100%;
     }
 
     .overlay {
@@ -89,14 +95,13 @@
 </head>
 <body>
 
-  <!-- Vimeo Background Embed -->
-   <!-- Updated Vimeo embed code with loop, autoplay, and no branding- removed picture in picture -->
-  <div class="video-background">
-    <iframe src="https://player.vimeo.com/video/1079656414?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&portrait=0"
-            frameborder="0"
-            allow="autoplay; fullscreen"
-            allowfullscreen
-            title="golden-gates-looped">
+  <!-- Vimeo Video Embed as a Background -->
+  <div class="video-container">
+    <iframe src="https://player.vimeo.com/video/1079656414?autoplay=1&muted=1&loop=1&byline=0&title=0&portrait=0" 
+            frameborder="0" 
+            allow="autoplay; fullscreen" 
+            allowfullscreen 
+            title="Golden Gates Looped">
     </iframe>
   </div>
 
