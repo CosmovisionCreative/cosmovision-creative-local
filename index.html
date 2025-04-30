@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- This is a comment -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -20,7 +19,7 @@
       overflow: hidden;
     }
 
-    .vimeo-background-wrapper {
+    .video-background iframe {
       position: fixed;
       top: 0;
       left: 0;
@@ -28,11 +27,6 @@
       height: 100vh;
       z-index: -1;
       pointer-events: none;
-    }
-
-    .vimeo-background-wrapper iframe {
-      width: 100%;
-      height: 100%;
     }
 
     .overlay {
@@ -95,18 +89,15 @@
 </head>
 <body>
 
-  <!-- Full-Screen Background Vimeo Video -->
-  <div class="vimeo-background-wrapper">
-    <div style="padding:56.25% 0 0 0;position:relative;height:100%;">
-      <iframe src="https://player.vimeo.com/video/1079656414?autoplay=1&loop=1&h=e29a6b044f&badge=0&autopause=0&player_id=0&app_id=58479"
-              frameborder="0"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-              style="position:absolute;top:0;left:0;width:100%;height:100%;"
-              title="golden-gates-looped.mp4">
-      </iframe>
-    </div>
+  <!-- Vimeo Background Embed -->
+  <div class="video-background">
+    <iframe src="https://player.vimeo.com/video/1079656414?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&portrait=0"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            title="golden-gates-looped">
+    </iframe>
   </div>
-  <script src="https://player.vimeo.com/api/player.js"></script>
 
   <div class="overlay">
     <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
