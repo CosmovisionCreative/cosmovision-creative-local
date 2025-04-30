@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cosmovision Creative</title>
-  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="icon" href="flavicon.png" type="image/png" />
 
   <style>
     html, body {
@@ -13,7 +13,6 @@
       height: 100%;
       overflow: hidden;
       font-family: 'Poppins', sans-serif;
-      background: black;
     }
 
     .video-background {
@@ -22,34 +21,23 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -2;
+      z-index: -1;
       overflow: hidden;
+      background-image: url('preview-frame.jpg');
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
     }
 
     .video-background iframe {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 177.78vh;
+      width: 177.78vh; /* 100 * (16 / 9) = 177.78 */
       height: 100vh;
       transform: translate(-50%, -50%);
       pointer-events: none;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .video-preview {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: black;
-      background-image: url('preview-frame.jpg');
-      background-size: cover;
-      background-position: center;
-      z-index: -1;
-      opacity: 1;
+      opacity: 0; /* Set initial opacity for fade-in effect */
       transition: opacity 1s ease-in-out;
     }
 
@@ -67,27 +55,6 @@
       color: white;
       padding: 2rem;
     }
-
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-in {
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards;
-    }
-
-    .fade-in.delay-1 { animation-delay: 0.5s; }
-    .fade-in.delay-2 { animation-delay: 1s; }
-    .fade-in.delay-3 { animation-delay: 1.5s; }
-    .fade-in.delay-4 { animation-delay: 2s; }
 
     img.logo {
       width: 120px;
@@ -131,12 +98,12 @@
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
     }
   </style>
+
 </head>
 
 <body>
 
-  <div class="video-preview" id="videoPreview"></div>
-
+  <!-- Fullscreen Vimeo Background with Lazy Loading -->
   <div class="video-background">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
@@ -149,20 +116,18 @@
   </div>
 
   <div class="overlay">
-    <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo fade-in delay-1" />
-    <h1 class="headline fade-in delay-2">A venture studio where sacred visions blossom into soulful enterprises.</h1>
-    <p class="subheadline fade-in delay-3">Guiding sacred entrepreneurs from vision to launch.</p>
-    <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link fade-in delay-4">✨ Enter the Stargate ✨</a>
+    <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
+    <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
+    <p class="subheadline">Guiding sacred entrepreneurs from vision to launch.</p>
+    <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link">✨ Enter the Stargate ✨</a>
   </div>
 
   <script>
     window.addEventListener("load", () => {
       const iframe = document.querySelector('.video-background iframe');
-      const preview = document.getElementById('videoPreview');
-
-      iframe.style.opacity = 1;
-      preview.style.opacity = 0;
-      setTimeout(() => preview.style.display = 'none', 1000);
+      iframe.style.opacity = 1; // Fade in the iframe when the page is loaded
+      const videoBackground = document.querySelector('.video-background');
+      videoBackground.style.backgroundImage = 'none'; // Remove the preview frame once video is loaded
     });
   </script>
 
