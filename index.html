@@ -21,7 +21,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 177.78vh; /* 100 * (16 / 9) = 177.78 */
+    width: 177.78vh;
     height: 100vh;
     transform: translate(-50%, -50%);
     pointer-events: none;
@@ -66,52 +66,54 @@
   }
 
   .cta-link {
-    font-size: 1.1rem;
-    color: #fff; /* White font for button */
-    font-weight: bold; /* Bold font */
-    text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    position: relative;
+    display: inline-block;
     padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
     background-color: rgba(255, 255, 255, 0.1);
-    position: relative; /* For shimmer effect */
-    overflow: hidden; /* Ensure shimmer stays inside the button */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 0;
   }
 
-  .cta-link:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    color: #000;
-    box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
-  }
-
-  /* Glint Effect (Light dancing across a metal surface) */
   .cta-link::before {
     content: '';
     position: absolute;
-    top: -100%;
-    left: -100%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-    animation: glint 1.5s infinite 0.5s; /* Delay shimmer after page load */
-    z-index: 2; /* Keep glint effect on top of button */
+    top: 0;
+    left: -75%;
+    height: 100%;
+    width: 50%;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    filter: blur(2px);
+    animation: shimmer-slide 2.5s ease-in-out infinite;
+    z-index: 1;
   }
 
-  @keyframes glint {
+  @keyframes shimmer-slide {
     0% {
-      top: -100%;
-      left: -100%;
+      left: -75%;
     }
     50% {
-      top: 50%;
-      left: 50%;
-    }
-    100% {
-      top: 100%;
       left: 100%;
     }
+    100% {
+      left: 100%;
+    }
+  }
+
+  .cta-link:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
   }
 
   /* Preloader Styles */
@@ -173,7 +175,6 @@
 
   <script>
     window.addEventListener("load", () => {
-      // Hide preloader once everything is loaded
       const preloader = document.getElementById('preloader');
       preloader.style.display = 'none';
     });
