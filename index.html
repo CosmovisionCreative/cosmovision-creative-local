@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cosmovision Creative</title>
   <link rel="icon" href="favicon.png" type="image/png" />
-  
+
   <style>
     html, body {
       margin: 0;
@@ -22,12 +22,7 @@
       width: 100vw;
       height: 100vh;
       z-index: -1;
-      background-image: url('preview-frame.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 1;
-      transition: opacity 1s ease-in-out;
+      overflow: hidden;
     }
 
     .video-background iframe {
@@ -94,7 +89,7 @@
       transition: all 0.5s ease;
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
       background-color: rgba(255, 255, 255, 0.1);
-      font-weight: normal;  /* Ensure the font weight is normal */
+      font-weight: normal;
       overflow: hidden;
     }
 
@@ -119,19 +114,54 @@
       color: #000;
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
     }
+
+    /* Stargate Effect for Button */
+    .cta-link::after {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      width: calc(100% + 12px);
+      height: calc(100% + 12px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .cta-link:hover::after {
+      opacity: 1;
+      animation: stargate 1.5s infinite;
+    }
+
+    @keyframes stargate {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+      50% {
+        transform: scale(1.2);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Fullscreen Vimeo Background with Lazy Loading Removed -->
+  <!-- Fullscreen Vimeo Background with Lazy Loading -->
   <div class="video-background">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
       frameborder="0" 
       allow="autoplay; fullscreen" 
       allowfullscreen 
-      title="Golden Gates Looped">
+      title="Golden Gates Looped" 
+      loading="lazy">
     </iframe>
   </div>
 
