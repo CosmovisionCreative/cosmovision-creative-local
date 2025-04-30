@@ -166,4 +166,26 @@
   <div class="overlay">
     <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
     <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
-    <p class="subheadline">Guiding sacred entrepreneurs from vision to la
+    <p class="subheadline">Guiding sacred entrepreneurs from vision to launch.</p>
+    <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link">✨ Enter the Stargate ✨</a>
+  </div>
+
+  <script>
+    window.addEventListener("load", () => {
+      const iframe = document.querySelector('.video-background iframe');
+      const overlay = document.querySelector('.overlay');
+      
+      // Faster fade-in for video: 800ms instead of 2000ms
+      setTimeout(() => {
+        iframe.style.opacity = 1;
+      }, 800);
+
+      // Overlay still fades in after 1s
+      setTimeout(() => {
+        overlay.style.opacity = 1;
+      }, 1000);
+    });
+  </script>
+
+</body>
+</html>
