@@ -34,7 +34,7 @@
       transform: translate(-50%, -50%);
       pointer-events: none;
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transition: opacity 0.8s ease-in-out;
     }
 
     .overlay {
@@ -115,7 +115,6 @@
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
     }
 
-    /* Stargate Effect for Button */
     .cta-link::after {
       content: '';
       position: absolute;
@@ -153,7 +152,6 @@
 
 <body>
 
-  <!-- Fullscreen Vimeo Background with Lazy Loading -->
   <div class="video-background">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
@@ -168,26 +166,4 @@
   <div class="overlay">
     <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
     <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
-    <p class="subheadline">Guiding sacred entrepreneurs from vision to launch.</p>
-    <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link">✨ Enter the Stargate ✨</a>
-  </div>
-
-  <script>
-    window.addEventListener("load", () => {
-      const iframe = document.querySelector('.video-background iframe');
-      const overlay = document.querySelector('.overlay');
-      
-      // Delay video fade-in by 2 seconds
-      setTimeout(() => {
-        iframe.style.opacity = 1;
-      }, 2000);
-
-      // Fade in overlay content
-      setTimeout(() => {
-        overlay.style.opacity = 1;
-      }, 1000);
-    });
-  </script>
-
-</body>
-</html>
+    <p class="subheadline">Guiding sacred entrepreneurs from vision to la
