@@ -21,7 +21,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -1;
+      z-index: -2;
       overflow: hidden;
     }
 
@@ -35,6 +35,18 @@
       pointer-events: none;
       opacity: 0;
       transition: opacity 1s ease-in-out;
+    }
+
+    .preview-frame {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
     }
 
     .overlay {
@@ -81,25 +93,21 @@
       position: relative;
       display: inline-block;
       font-size: 1.1rem;
+      font-weight: normal;
       color: #fff;
       text-decoration: none;
       border: 1px solid rgba(255, 255, 255, 0.4);
       padding: 0.6rem 1.2rem;
       border-radius: 8px;
       background-color: rgba(255, 255, 255, 0.1);
-      font-weight: normal;
       overflow: hidden;
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
       animation: shimmer 3s infinite, sparkle 5s infinite;
     }
 
     @keyframes shimmer {
-      0% {
-        background-position: -100% 0;
-      }
-      100% {
-        background-position: 200% 0;
-      }
+      0% { background-position: -100% 0; }
+      100% { background-position: 200% 0; }
     }
 
     @keyframes sparkle {
@@ -139,7 +147,10 @@
 
 <body>
 
-  <!-- Fullscreen Vimeo Background with Lazy Loading -->
+  <!-- Still frame preview image -->
+  <img src="preview-frame.jpeg" alt="Video Preview" class="preview-frame" />
+
+  <!-- Fullscreen Vimeo Background -->
   <div class="video-background">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
@@ -151,6 +162,7 @@
     </iframe>
   </div>
 
+  <!-- Overlay Content -->
   <div class="overlay">
     <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
     <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
@@ -160,18 +172,23 @@
 
   <script>
     window.addEventListener("load", () => {
+      const preview = document.querySelector('.preview-frame');
       const iframe = document.querySelector('.video-background iframe');
       const overlay = document.querySelector('.overlay');
-      
-      // Delay video fade-in by 3 seconds to preserve first frame
-      setTimeout(() => {
-        iframe.style.opacity = 1;
-      }, 3000); // Increased delay to 3s
 
-      // Fade in overlay content
+      // Step 1: Show preview still immediately
+      preview.style.opacity = 1;
+
+      // Step 2: Show overlay content
       setTimeout(() => {
         overlay.style.opacity = 1;
-      }, 1000);
+      }, 800);
+
+      // Step 3: After 3 seconds, fade out preview, fade in video
+      setTimeout(() => {
+        preview.style.opacity = 0;
+        iframe.style.opacity = 1;
+      }, 3000);
     });
   </script>
 
