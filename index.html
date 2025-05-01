@@ -27,6 +27,17 @@
       opacity: 1;
       transition: opacity 1s ease-in-out;
     }
+    .video-background iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 177.78vh;
+      height: 100vh;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
     .overlay {
       position: relative;
       z-index: 1;
@@ -203,7 +214,7 @@
     <p class="subheadline">Guiding sacred entrepreneurs from vision to launch.</p>
     <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link">✨ Enter the Stargate ✨</a>
   </div>
-  <!-- Mobile-specific overlay and video background -->
+  <!-- Mobile-specific overlay -->
   <div class="mobile-overlay">
     <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="mobile-logo" />
     <h1 class="mobile-headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
