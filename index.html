@@ -115,6 +115,8 @@
     @media (max-width: 768px) {
       .overlay {
         padding: 1rem;
+        max-width: 90%; /* Limit the maximum width to 90% of the viewport */
+        margin: 0 auto; /* Center the overlay horizontally */
       }
       img.logo {
         width: 100px;
@@ -129,11 +131,26 @@
         font-size: 1rem;
         padding: 0.5rem 1rem;
       }
-      /* Ensure text and button fit within the viewport */
-      .overlay, .mobile-overlay {
-        padding: 1rem;
+    }
+    /* Desktop-specific styles */
+    @media (min-width: 769px) {
+      .overlay {
+        padding: 2rem;
         max-width: 90%; /* Limit the maximum width to 90% of the viewport */
         margin: 0 auto; /* Center the overlay horizontally */
+      }
+      img.logo {
+        width: 120px;
+      }
+      h1.headline {
+        font-size: 2.2rem;
+      }
+      p.subheadline {
+        font-size: 1.2rem;
+      }
+      .cta-link {
+        font-size: 1.1rem;
+        padding: 0.6rem 1.2rem;
       }
     }
   </style>
