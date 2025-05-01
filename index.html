@@ -2,53 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Cosmovision Creative</title>
   <link rel="icon" href="favicon.png" type="image/png" />
-  
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
+      overflow: hidden;
       font-family: 'Poppins', sans-serif;
-      overflow: auto; /* Allow scrolling on mobile */
     }
-
-    /* Desktop Video Background */
     .video-background {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       z-index: -1;
       background-image: url('preview-frame.jpeg');
-      background-size: cover; /* Ensures background image covers the screen */
+      background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       opacity: 1;
       transition: opacity 1s ease-in-out;
     }
-
     .video-background iframe {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 177.78vh; /* Larger width to ensure it fills the screen */
-      height: 100vh; 
+      width: 100%;
+      height: 100%;
       transform: translate(-50%, -50%);
       pointer-events: none;
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
-
-    /* Overlay Styles */
     .overlay {
       position: relative;
       z-index: 1;
       height: 100vh;
-      width: 100%;
+      width: 100vw;
       background: rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
@@ -60,7 +54,6 @@
       opacity: 0;
       transition: opacity 2s ease;
     }
-
     img.logo {
       width: 120px;
       height: auto;
@@ -68,7 +61,6 @@
       border-radius: 12px;
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
     }
-
     h1.headline {
       font-size: 2.2rem;
       font-weight: 500;
@@ -76,14 +68,12 @@
                    0 0 20px rgba(173, 216, 230, 0.3);
       margin-bottom: 1rem;
     }
-
     p.subheadline {
       font-size: 1.2rem;
       font-weight: 300;
       text-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
       margin-bottom: 2rem;
     }
-
     .cta-link {
       position: relative;
       display: inline-block;
@@ -96,10 +86,9 @@
       transition: all 0.5s ease;
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
       background-color: rgba(255, 255, 255, 0.1);
-      font-weight: normal;
+      font-weight: normal;  /* Ensure the font weight is normal */
       overflow: hidden;
     }
-
     .cta-link::before {
       content: '';
       position: absolute;
@@ -111,121 +100,84 @@
       transform: skewX(-20deg);
       transition: left 0.7s ease-in-out;
     }
-
     .cta-link:hover::before {
       left: 125%;
     }
-
     .cta-link:hover {
       background-color: rgba(255, 255, 255, 0.3);
       color: #000;
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
     }
 
-    /* Mobile Styles Container */
-    .mobile-video-container {
-      display: none; /* Hide mobile-specific video by default */
-    }
-
+    /* Mobile-specific styles */
     @media (max-width: 768px) {
-      /* Show Mobile Video Container */
-      .mobile-video-container {
-        display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
+      .overlay {
+        padding: 1rem;
       }
-
-      /* Mobile Video Background - Cover the screen completely */
-      .mobile-video-container iframe {
-        position: absolute;
-        top: 50%;
-        left: 50%;
+      h1.headline {
+        font-size: 1.8rem;
+      }
+      p.subheadline {
+        font-size: 1rem;
+      }
+      .cta-link {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+      }
+      .video-background iframe {
         width: 100%;
         height: 100%;
         transform: translate(-50%, -50%);
-        pointer-events: none;
-        opacity: 1;
-        object-fit: cover; /* Make video fill the screen */
-        object-position: center center; /* Keep it centered */
       }
-
-      /* Mobile Layout Adjustments */
-      html, body {
-        overflow: auto;
-        height: auto; /* Allow body to expand on mobile */
-      }
-
       .overlay {
-        padding: 1rem; /* Reduce padding on mobile */
+        padding: 1rem;
       }
-
+      .logo {
+        width: 100px;
+      }
       h1.headline {
-        font-size: 1.6rem; /* Scale down the headline for mobile */
+        font-size: 1.8rem;
       }
-
       p.subheadline {
-        font-size: 1rem; /* Scale down the subheadline */
+        font-size: 1rem;
       }
-
       .cta-link {
         font-size: 1rem;
-        padding: 0.5rem 1rem; /* Adjust button size */
+        padding: 0.5rem 1rem;
       }
     }
   </style>
 </head>
-
 <body>
-
-  <!-- Fullscreen Vimeo Background for Desktop -->
+  <!-- Fullscreen Vimeo Background with Lazy Loading Removed -->
   <div class="video-background">
-    <iframe 
-      src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
-      frameborder="0" 
-      allow="autoplay; fullscreen" 
-      allowfullscreen 
+    <iframe
+      src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1"
+      frameborder="0"
+      allow="autoplay; fullscreen"
+      allowfullscreen
       title="Golden Gates Looped">
     </iframe>
   </div>
-
-  <!-- Mobile Video Background (for smaller screens) -->
-  <div class="mobile-video-container">
-    <iframe 
-      src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
-      frameborder="0" 
-      allow="autoplay; fullscreen" 
-      allowfullscreen 
-      title="Golden Gates Looped">
-    </iframe>
-  </div>
-
   <div class="overlay">
     <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
     <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
     <p class="subheadline">Guiding sacred entrepreneurs from vision to launch.</p>
     <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link">✨ Enter the Stargate ✨</a>
   </div>
-
   <script>
     window.addEventListener("load", () => {
       const iframe = document.querySelector('.video-background iframe');
       const overlay = document.querySelector('.overlay');
-      
       // Delay video fade-in by 2 seconds
       setTimeout(() => {
         iframe.style.opacity = 1;
       }, 2000);
-
       // Fade in overlay content
       setTimeout(() => {
         overlay.style.opacity = 1;
       }, 1000);
     });
   </script>
-
 </body>
 </html>
