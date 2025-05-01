@@ -117,10 +117,19 @@
         display: none;
       }
       .mobile-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         display: block;
         padding: 1rem;
         max-width: 90%; /* Limit the maximum width to 90% of the viewport */
         margin: 0 auto; /* Center the overlay horizontally */
+        justify-content: flex-start; /* Adjust vertical alignment */
+        align-items: center; /* Center horizontally */
+        flex-direction: column; /* Stack elements vertically */
+        padding-top: 25%; /* Position content halfway down */
       }
       img.logo {
         width: 100px;
