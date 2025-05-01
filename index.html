@@ -15,6 +15,7 @@
       overflow: auto; /* Allow scrolling on mobile */
     }
 
+    /* Desktop Video Background */
     .video-background {
       position: fixed;
       top: 0;
@@ -34,16 +35,15 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 100%;
-      height: 100%;
+      width: 177.78vh; /* Larger width to ensure it fills the screen */
+      height: 100vh; 
       transform: translate(-50%, -50%);
       pointer-events: none;
       opacity: 0;
       transition: opacity 1s ease-in-out;
-      object-fit: cover; /* Ensure the video covers the entire screen */
-      object-position: center center; /* Keep the video centered */
     }
 
+    /* Overlay Styles */
     .overlay {
       position: relative;
       z-index: 1;
@@ -96,7 +96,7 @@
       transition: all 0.5s ease;
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
       background-color: rgba(255, 255, 255, 0.1);
-      font-weight: normal;  /* Ensure the font weight is normal */
+      font-weight: normal;
       overflow: hidden;
     }
 
@@ -122,8 +122,38 @@
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
     }
 
-    /* Mobile Styles */
+    /* Mobile Styles Container */
+    .mobile-video-container {
+      display: none; /* Hide mobile-specific video by default */
+    }
+
     @media (max-width: 768px) {
+      /* Show Mobile Video Container */
+      .mobile-video-container {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      /* Mobile Video Background - Cover the screen completely */
+      .mobile-video-container iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        opacity: 1;
+        object-fit: cover; /* Make video fill the screen */
+        object-position: center center; /* Keep it centered */
+      }
+
+      /* Mobile Layout Adjustments */
       html, body {
         overflow: auto;
         height: auto; /* Allow body to expand on mobile */
@@ -151,8 +181,19 @@
 
 <body>
 
-  <!-- Fullscreen Vimeo Background with Lazy Loading Removed -->
+  <!-- Fullscreen Vimeo Background for Desktop -->
   <div class="video-background">
+    <iframe 
+      src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
+      frameborder="0" 
+      allow="autoplay; fullscreen" 
+      allowfullscreen 
+      title="Golden Gates Looped">
+    </iframe>
+  </div>
+
+  <!-- Mobile Video Background (for smaller screens) -->
+  <div class="mobile-video-container">
     <iframe 
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1" 
       frameborder="0" 
