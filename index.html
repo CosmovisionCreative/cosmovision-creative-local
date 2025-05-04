@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cosmovision Creative</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <style>
+    /* General Reset and Font */
     body {
       background-color: white; /* Ensure the iframe has a white background */
     }
@@ -15,35 +16,74 @@
       height: 100%;
       overflow: hidden;
       font-family: 'Poppins', sans-serif;
+      background-color: white;
     }
-    .video-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      background-image: url('preview-frame.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 1;
-      transition: opacity 1s ease-in-out;
+    /* --- DESKTOP VIDEO BACKGROUND - CSS Styles --- */
+    .video-background-desktop {
+      display: block; /* Ensure the video is displayed */
+      position: fixed; /* Fixed position for video */
+      top: 0; /* Align the video to the top of the screen */
+      left: 0; /* Align the video to the left of the screen */
+      width: 100%; /* Make the video fill the full viewport width */
+      height: 100%; /* Make the video fill the full viewport height */
+      overflow: hidden; /* Hides any content that spills out of the element’s boundaries */
+      z-index: -2; /* Send the video to the background */
+      object-fit: cover; /* Ensure the video covers the entire background */
+      background-image: url('preview-frame.jpg'); /* Fallback image */
+      background-size: cover; /* Ensure the background image covers the area */
+      background-position: center; /* Center the background image */
+      background-repeat: no-repeat; /* Do not repeat the background image */
     }
-    .video-background iframe {
+
+    /* Video iframe within the background */
+    .video-background-desktop iframe {
+      position: absolute; /* Absolute position relative to parent */
+      top: 50%; /* Align the iframe to the middle of the screen */
+      left: 50%; /* Align the iframe to the middle of the screen */
+      width: 100%; /* Make the iframe fill the full width */
+      height: 100%; /* Make the iframe fill the full height */
+      transform: translate(-50%, -50%); /* Move the left corner of frame so true center is centered on viewport */
+      pointer-events: none; /* Disable any interaction with the iframe */
+      opacity: 1; /* Make the iframe visible */
+      transition: opacity 1s ease-in-out; /* Smooth fade-in transition */
+    }
+
+    /* --- MOBILE VIDEO BACKGROUND - CSS Styles --- */
+    /* Ensure the video still covers the full screen but with mobile adjustments */
+    .video-background-mobile {
+      object-fit: cover; /* Ensure the video covers the entire background */
+      background-image: url('preview-frame.jpg'); /* Fallback background image */
+      background-size: cover; /* Ensure the background image covers the area */
+      background-position: center; /* Center the background image */
+      background-repeat: no-repeat; /* Do not repeat the background image */
+      position: fixed; /* Keeps vid in place as you scroll, so always visible in viewport - vI */
+      top: 0; /* Align the video to the top of the viewport */
+      left: 0; /* Align the video to the left of viewport */
+      width: 120vw; /* Allow the video to be 20% wider than the viewport - vI */
+      height: 120vh; /* Allow the video to be 20% taller than the viewport -vI */
+      z-index: -2; /* Should be behind overlays but above page background - vD */
+      opacity: 1; /* Set opacity to ensure it's visible - vI */
+      transition: opacity 1s ease-in-out; /* Smooth transition for opacity- vI */
+    }
+
+    /* Ensure the video is responsive */
+    .video-background-mobile iframe {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 177.78vh;
-      height: 100vh;
+      top: 50%; /* centers it */
+      left: 50%; /* centers it*/
+      width: 140vw; /* Make iframe wider to cover the overflow - vI */
+      height: 140vh; /* Make iframe taller to cover the overflow - VI */
       transform: translate(-50%, -50%);
-      pointer-events: none;
-      opacity: 0;
+      object-fit: cover; /* added vE */
+      pointer-events: none; /* Disable interaction with the video */
+      opacity: 0; /* Start the iframe with opacity 0, which we can fade in later - vI */
       transition: opacity 1s ease-in-out;
     }
-    .overlay, .mobile-overlay {
+
+    /* --- DESKTOP OVERLAY - CSS Styles --- */
+    .desktop-overlay {
       position: relative;
-      z-index: 1;
+      z-index: 2; /* added vE */
       height: 100vh;
       width: 100vw;
       background: rgba(0, 0, 0, 0.4);
@@ -56,131 +96,272 @@
       padding: 2rem;
       opacity: 0;
       transition: opacity 2s ease;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
-    img.logo, .mobile-logo {
+
+    img.logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+    }
+
+    h1.headline {
+      font-size: 2.6rem; /* updated from 2.2rem for more presence on desktop - vL */
+      font-weight: 500;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 
+                  0 0 20px rgba(173, 216, 230, 0.3);
+      margin-bottom: 1rem;
+    }
+
+    p.subheadline {
+      font-size: 1.4rem; /* updated from 1.2rem for stronger emphasis on desktop - vL */
+      font-weight: 300;
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+      margin-bottom: 2rem;
+    }
+
+    .stargate-button { /* renamed from .cta-link --> stargate-button in vE */
+      position: relative;
+      z-index: 10; /* <-- top layer, added vE */
+      display: inline-block;
+      font-size: 1.4rem; /* <-- updated from J for a bolder desktop call-to-action - vL */
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 0.9rem 1.8rem; /* <-- updated to match J for balanced desktop spacing - vL */
+      border-radius: 12px;  /* <-- changed 8px -> 12px to soften the button edges on desktop - vL */
+      transition: all 0.5s ease;
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.3);  /* <-- changed 0 0 12px rgba(255, 255, 255, 0.2) to 0 0 14px rgba(255, 255, 255, 0.3) more pronounced on desktop - vD */
+      background-color: rgba(255, 255, 255, 0.1);
+      font-weight: normal;
+      overflow: hidden;
+    }
+
+    .stargate-button::before {
+      content: '';  /* <-- creates the pseudo element */
+      position: absolute; /* <-- allows it to sit inside .stargate-button */
+      top: 0; 
+      left: -75%; /* <-- starts the shimmer effect off-screen to the left */
+      width: 50%; /* <-- gives it a size that allows the shimmer to pass through nicely */
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.3), rgba(255,255,255,0)); /* <-- is the actual shimmer light beam */
+      transform: skewX(-20deg); /* <-- angles it for a diagonal effect */
+      transition: left 0.7s ease-in-out; /* <-- animates it smoothly when hovered */
+    }
+
+    .stargate-button:hover::before { /* <-- When hovered, the shimmer travels from -75% (off-screen left) to 125% (off-screen right) */
+      left: 125%;
+    }
+
+    .stargate-button:hover {
+      background-color: rgba(255, 255, 255, 0.3); /* <-- Lightens the background to make the hover state noticeable */
+      color: #000; /* <-- Switches text color to black for contrast */
+      box-shadow: 0 0 22px rgba(255, 255, 255, 0.5); /* <-- Adds a soft glowing shadow around the button for emphasis - increased 18px -> 22px vE */
+    }
+
+    /* --- MOBILE OVERLAY - CSS Styles --- */
+    .mobile-overlay {
+      position: relative;
+      z-index: 2; /* Should be above video - changed from 0 -> 2 in vE - vD */
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex; /* Ensure it's visible on phones */
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Added in vE */
+      text-align: center;
+      color: white;
+      padding: 2rem;
+      opacity: 0; /* Initially hidden - FIXED in vL */
+      transition: opacity 2s ease; /* Optional smooth fade-in */
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+
+    img.logo {
       width: 120px;
       height: auto;
       margin-bottom: 1rem;
       border-radius: 12px;
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
     }
-    h1.headline, .mobile-headline {
+
+    h1.headline {
       font-size: 2.2rem;
       font-weight: 500;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
-                   0 0 20px rgba(173, 216, 230, 0.3);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px 
+                    rgba(173, 216, 230, 0.3);
       margin-bottom: 1rem;
     }
-    p.subheadline, .mobile-subheadline {
+
+    p.subheadline {
       font-size: 1.2rem;
       font-weight: 300;
       text-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
       margin-bottom: 2rem;
     }
-    .cta-link, .mobile-cta-link {
+
+    .stargate-button {
       position: relative;
+      z-index: 10; /* <-- top layer, added this line in vE */
       display: inline-block;
-      font-size: 1.1rem;
+      font-size: 0.9rem; /* <-- changed 1.1rem -> 0.9rem smaller font for mobile - vD */
       color: #fff;
       text-decoration: none;
       border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 0.6rem 1.2rem;
+      padding: 0.6rem 1.2rem; /* <-- reduced padding from 0.6rem 1.2rem for smaller screens - vD */
       border-radius: 8px;
       transition: all 0.5s ease;
       box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
       background-color: rgba(255, 255, 255, 0.1);
-      font-weight: normal;  /* Ensure the font weight is normal */
+      font-weight: normal;
       overflow: hidden;
     }
-    .cta-link::before, .mobile-cta-link::before {
+
+    .stargate-button::before {
       content: '';
       position: absolute;
       top: 0;
       left: -75%;
       width: 50%;
       height: 100%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+      background: linear-gradient(120deg, rgba(255,255,255,0.6), rgba(255,255,255,0)); /* <-- changed .03 to .06 for a stronger shimmer glow - vD */
       transform: skewX(-20deg);
       transition: left 0.7s ease-in-out;
     }
-    .cta-link:hover::before, .mobile-cta-link:hover::before {
+
+    .stargate-button:hover::before {
       left: 125%;
     }
-    .cta-link:hover, .mobile-cta-link:hover {
+
+    .stargate-button:hover {
       background-color: rgba(255, 255, 255, 0.3);
       color: #000;
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
     }
-    /* Mobile-specific styles */
-    @media (max-width: 768px) {
-      .overlay {
-        display: none;
+
+    /* --- DESKTOP MEDIA QUERY FOR CONTENT - Mobile Overlay and Content CSS Styles - Ensures only Desktop Shows --- */
+    @media (min-width: 769px) {
+      /* Desktop Overlay Styles */
+      .desktop-overlay {  /* SHOULD - SOMETHING AMISS -  lines different - renamed from video-background-desktop -> .desktop-overlay in vE */
+        display: flex; /* Show desktop overlay */
+        padding: 2rem;
+        opacity: 0; /* Initially hidden - vM  */
+        transition: opacity 1s ease; /* Optional: smooth fade-in effect - vM */
       }
+
+      /* Bigger Logo for Desktop */
+      img.logo {
+        width: 540px;
+        margin-bottom: 2rem;
+      }
+
+      /* Bigger Headline for Desktop */
+      h1.headline {
+        font-size: 4.5vw; /* Scales with viewport width */
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Bigger Subheadline with More Space Below */
+      p.subheadline {
+        font-size: 2vw;
+        margin-bottom: 6rem; /* Doubled the space between subheadline and button in vD */
+      }
+
+      /* Bigger Button for Desktop */
+      .stargate-button {
+        font-size: 3.6rem;       /* 20% bigger than 3rem */
+        padding: 1.8rem 3.6rem;   /* Adjusted for the bigger font size */
+      }
+
+      /* Hide the mobile overlay on desktop */
       .mobile-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: block;
-        padding: 1rem;
-        max-width: 90%; /* Limit the maximum width to 90% of the viewport */
-        margin: 0 auto; /* Center the overlay horizontally */
-        justify-content: flex-start; /* Adjust vertical alignment */
-        align-items: center; /* Center horizontally */
-        flex-direction: column; /* Stack elements vertically */
-        padding-top: 25%; /* Position content halfway down */
+        display: none; /* Hide mobile overlay - added in vE */
       }
+
+      /* Ensure Desktop Video Background is Visible and Mobile Video is Hidden */
+      .video-background-desktop {
+        display: block; /* added in vE */
+      }
+
+      .video-background-mobile { 
+        display: none;  /* added in vE */
+      }
+    }
+
+    /* --- MOBILE MEDIA QUERY FOR CONTENT - Mobile Overlay and Content CSS Styles - —Ensures only Mobile Shows --- */
+    @media (max-width: 768px) {
+      /* Mobile Overlay Styles */
+      .mobile-overlay {
+        display: flex; /* Show mobile overlay - added this line in vE - SHOULD it be deleted? */
+        padding: 1rem;
+        opacity: 0; /* Initially hidden - vM  */
+        transition: opacity 1s ease; /* Optional: smooth fade-in effect - vM */
+        max-width: 100%; /* Limit the maximum width to 90% --> 100% of the viewport in vE */
+        margin: 0 auto; /* Center the overlay horizontally */
+      }
+
+      /* Adjust the logo size on mobile */
       img.logo {
         width: 100px;
       }
+
+      /* Adjust headline font size for mobile */
       h1.headline {
         font-size: 1.8rem;
       }
+
+      /* Adjust subheadline font size for mobile */
       p.subheadline {
         font-size: 1rem;
       }
-      .cta-link {
+
+      /* Adjust button size for mobile */
+      .stargate-button {
         font-size: 1rem;
         padding: 0.5rem 1rem;
       }
-    }
-    /* Desktop-specific styles */
-    @media (min-width: 769px) {
-      .mobile-overlay {
-        display: none;
+
+      /* Hide the desktop overlay on mobile - added in vE */
+      .desktop-overlay {
+        display: none; /* Hide desktop overlay - added line in vE even tho Lio its default and unnecceary */
       }
-      .overlay {
-        display: block;
-        padding: 2rem;
-        max-width: 90%; /* Limit the maximum width to 90% of the viewport */
-        margin: 0 auto; /* Center the overlay horizontally */
+
+      /* Ensure Mobile Video Background is Visible and Desktop Video is Hidden - added in vE  */
+      .video-background-desktop {
+        display: none; /* Hide desktop video - - added line in vE even tho Lio its default and unnecceary */
       }
-      img.logo {
-        width: 120px;
+
+      /* NEW STYLES for mobile video background container */
+      .video-background-mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        background-image: url('preview-frame.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 1;
+        transition: opacity 1s ease-in-out;
       }
-      h1.headline {
-        font-size: 2.2rem;
-      }
-      p.subheadline {
-        font-size: 1.2rem;
-      }
-      .cta-link {
-        font-size: 1.1rem;
-        padding: 0.6rem 1.2rem;
-      }
-      .video-background iframe {
-        width: 100%;
-        height: 100%;
-        transform: translate(-50%, -50%);
-        object-fit: contain; /* Allow the video to scale with the window */
+
+      .video-background-mobile {
+        display: block; /* Show mobile video - added line in vE even tho Lio its default and unnecceary */
       }
     }
   </style>
 </head>
 <body>
-  <!-- Fullscreen Vimeo Background with Lazy Loading Removed -->
-  <div class="video-background">
+  <!-- DESKTOP VIDEO BACKGROUND - vC edit YES-->
+  <div class="video-background-desktop">
     <iframe
       src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1"
       frameborder="0"
@@ -189,35 +370,75 @@
       title="Golden Gates Looped">
     </iframe>
   </div>
-  <div class="overlay">
+  <!-- DESKTOP OVERLAY CONTENT with fade in - added vD -->
+  <div class="overlay desktop-overlay">
     <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
     <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
-    <p class="subheadline">Guiding sacred entrepreneurs from vision to launch.</p>
-    <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link">✨ Enter the Stargate ✨</a>
+    <p class="subheadline">Guiding divine entrepreneurs from vision to launch.</p>
+    <a href="https://tally.so/r/wggaWd" target="_blank" class="stargate-button">✨ Enter the Stargate ✨</a>
   </div>
-  <div class="mobile-overlay">
-    <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="mobile-logo" />
-    <h1 class="mobile-headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
-    <p class="mobile-subheadline">Guiding sacred entrepreneurs from vision to launch.</p>
-    <a href="https://tally.so/r/wggaWd" target="_blank" class="mobile-cta-link">✨ Enter the Stargate ✨</a>
-  </div>
+  <!-- fade in for desktop overlay content - added vG -->
   <script>
     window.addEventListener("load", () => {
-      const iframe = document.querySelector('.video-background iframe');
-      const overlay = document.querySelector('.overlay');
-      const mobileOverlay = document.querySelector('.mobile-overlay');
-      // Delay video fade-in by 2 seconds
+      const desktopOverlay = document.querySelector('.desktop-overlay'); // Ensure it's targeting the desktop overlay
+      const desktopVideo = document.querySelector('.video-background-desktop iframe');
+      const mobileVideo = document.querySelector('.video-background-mobile iframe');
+
+      // Fade in overlay content for desktop after 1 second
       setTimeout(() => {
-        iframe.style.opacity = 1;
-      }, 2000);
-      // Fade in overlay content
+        desktopOverlay.style.opacity = .3; // Fade in the desktop overlay
+      }, 1000);  // Delay of 1 second before fade-in
+
+      // Fade in only the appropriate video after 2s
       setTimeout(() => {
-        if (window.innerWidth > 768) {
-          overlay.style.opacity = 1;
+        if (window.innerWidth <= 768) {
+          if (mobileVideo) mobileVideo.style.opacity = 1; // Fade in mobile video
         } else {
-          mobileOverlay.style.opacity = 1;
+          if (desktopVideo) desktopVideo.style.opacity = 1; // Fade in desktop video
         }
-      }, 1000);
+      }, 2000); // Delay of 2 seconds before video fade-in
+    });
+  </script>
+
+  <!-- MOBILE VIDEO BACKGROUND -->
+  <div class="video-background-mobile">
+    <iframe
+      src="https://player.vimeo.com/video/1080015059?h=a56eea9865&autoplay=1&muted=1&loop=1&background=1"
+      frameborder="0"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+      title="Golden Gates Looped">
+    </iframe>
+  </div>
+
+  <!-- MOBILE OVERLAY CONTENT with fade in - added vE ! -->
+  <div class="overlay mobile-overlay">
+    <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
+    <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
+    <p class="subheadline">Guiding divine entrepreneurs from vision to launch.</p>
+    <a href="https://tally.so/r/wggaWd" target="_blank" class="stargate-button">✨ Enter the Stargate ✨</a>
+  </div>
+
+  <!-- fade in for mobile overlay --> /* added in vE ! */
+  <script>
+    window.addEventListener("load", () => {
+      const desktopVideo = document.querySelector('.video-background-desktop iframe'); /* SHOULD THESE IDS BE UPDATED? - added in vE ! */
+      const mobileVideo = document.querySelector('.video-background-mobile iframe'); /* SHOULD THESE IDS BE UPDATED? - added in vE ! */
+      const mobileOverlay = document.querySelector('.mobile-overlay');
+
+      // Fade in overlay content /* added in vE ! */
+      setTimeout(() => {
+        mobileOverlay.style.opacity = .3; /* TRY IT = SHOULD THIS BE .3 or kept 1 bc it is content */
+      }, 1000); // 1000ms delay before opacity change
+
+      // Fade in only the appropriate video after 2s /* added in vE ! */
+      setTimeout(() => {
+        if (window.innerWidth <= 768) {
+          if (mobileVideo) mobileVideo.style.opacity = .3;
+        } else {
+          if (desktopVideo) desktopVideo.style.opacity = .3;
+        }
+      }, 2000);
     });
   </script>
 </body>
