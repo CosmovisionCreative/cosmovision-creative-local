@@ -16,86 +16,75 @@
       overflow: hidden;
       font-family: 'Poppins', sans-serif;
     }
-    .video-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -2;
-      background-image: url('preview-frame.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 1;
-      transition: opacity 1s ease-in-out;
+  .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    background-image: url('preview-frame.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
     }
-    .video-background iframe {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 177.78vh;
-      height: 100vh;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      z-index: -1; /* ← ADD THIS LINE */
+  .video-background iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 177.78vh;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: -1; /* ← ADD THIS LINE */
     }
 
-    .desktop-overlay {
-      position: absolute;
-      z-index: 1;
-      height: 100vh;
-      width: 100vw;
-      background: rgba(0, 0, 0, 0.4);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      opacity: 0;
-      transition: opacity 2s ease;
-      pointer-events: none; /* Prevent overlay from blocking content interactions */
+  .desktop-overlay {
+    position: absolute;
+    z-index: 10;  /* Increased for better stacking context */
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 2s ease;
+    pointer-events: none; /* Prevent overlay from blocking content interactions */
     }
     
-    .mobile-overlay {
-      position: absolute;
-      z-index: 2;
-      height: 100vh;
-      width: 100vw;
-      background: rgba(0, 0, 0, 0.4);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      opacity: 0;
-      transition: opacity 2s ease;
-      pointer-events: none; /* Prevent overlay from blocking content interactions */
+  .mobile-overlay {
+     position: absolute;
+     z-index: 5;  /* Decreased for proper layering */
+     height: 100vh;
+     width: 100vw;
+     background: rgba(0, 0, 0, 0.4);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     text-align: center;
+     color: white;
+     opacity: 0;
+     transition: opacity 2s ease;
+     pointer-events: none; /* Prevent overlay from blocking content interactions */
     }
 
-
-    img.logo, .mobile-logo, .desktop-logo {
-      width: 120px;
-      height: auto;
-      margin-bottom: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
-      position: relative;
-      z-index: 3;
-    }
-
-    h1.headline, .mobile-headline, .desktop-headline {
-      font-size: 2.2rem;
-      font-weight: 500;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+   .h1.headline, .mobile-headline, .desktop-headline {
+     font-size: 2.2rem;
+     font-weight: 500;
+     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
                    0 0 20px rgba(173, 216, 230, 0.3);
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 3;
+     margin-bottom: 1rem;
+     position: relative;
+     z-index: 3;
     }
 
     p.subheadline, .mobile-subheadline, .desktop-subheadline {
@@ -147,62 +136,63 @@
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
     }
 
-    /* ===== Mobile View ===== */
-    @media (max-width: 768px) {
+     /* ===== Mobile View ===== */
+     @media (max-width: 768px) {
   
-      .mobile-logo {
-        width: 100px;
-      }
-      .mobile-headline {
-        font-size: 1.8rem;
-      }
-      .mobile-subheadline {
-        font-size: 1rem;
-      }
-      .mobile-cta-link {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-      }
+  .mobile-logo {
+    width: 100px;
+  }
+  .mobile-headline {
+    font-size: 1.8rem;
+  }
+  .mobile-subheadline {
+    font-size: 1rem;
+  }
+  .mobile-cta-link {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
 
-      .mobile-overlay {
-        display: flex;
-        z-index: 2; /* <-- Added */
-      }
+  .mobile-overlay {
+    display: flex;
+    z-index: 2; /* <-- Added */
+  }
 
-      .desktop-overlay {
-        display: none;
-      }
-    }
+  .desktop-overlay {
+    display: none;
+  }
+}
 
-    /* ===== Desktop View ===== */
-    @media (min-width: 769px) {
+/* ===== Desktop View ===== */
+@media (min-width: 769px) {
 
-      .desktop-logo {
-        width: 480px;
-      }
-      .desktop-headline {
-        font-size: 8.8rem;
-      }
-      .desktop-subheadline {
-        font-size: 4.8rem;
-      }
-      .desktop-cta-link {
-        font-size: 4.4rem;
-        padding: 2.4rem 4.8rem;
-      }
+  .desktop-logo {
+    width: 480px;
+  }
+  .desktop-headline {
+    font-size: 8.8rem;
+  }
+  .desktop-subheadline {
+    font-size: 4.8rem;
+  }
+  .desktop-cta-link {
+    font-size: 4.4rem;
+    padding: 2.4rem 4.8rem;
+  }
 
-      .desktop-overlay {
-        display: flex;
-        z-index: 1; /* <-- Added */
-      }
+  .desktop-overlay {
+    display: flex;
+    z-index: 1; /* <-- Added */
+  }
 
-      .mobile-overlay {
-        display: none;
-      }
-    }
+  .mobile-overlay {
+    display: none;
+  }
+}
+</style>
 
-  </style>
 </head>
+
 <body>
   <div class="video-background">
     <iframe
