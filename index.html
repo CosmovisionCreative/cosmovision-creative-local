@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +41,23 @@
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
-    .overlay, .mobile-overlay {
+    .overlay {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity 2s ease;
+
+    .mobile-overlay {
       position: relative;
       z-index: 1;
       height: 100vh;
@@ -114,23 +129,10 @@
     }
     /* Mobile-specific styles */
     @media (max-width: 768px) {
-      .mobile-overlay {
-        display: none;
-      }
-      .mobile-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: block;
+      .overlay {
         padding: 1rem;
         max-width: 90%; /* Limit the maximum width to 90% of the viewport */
         margin: 0 auto; /* Center the overlay horizontally */
-        justify-content: flex-start; /* Adjust vertical alignment */
-        align-items: center; /* Center horizontally */
-        flex-direction: column; /* Stack elements vertically */
-        padding-top: 25%; /* Position content halfway down */
       }
       img.logo {
         width: 100px;
@@ -149,27 +151,28 @@
     /* Desktop-specific styles */
     @media (min-width: 769px) {
       .overlay {
-        display: none;
-      }
-      .overlay {
-        display: block;
-        padding-top: 40%; /* Position content halfway down */
-        padding: 2rem;
-        max-width: 90%; /* Limit the maximum width to 90% of the viewport */
+        padding: 0rem;
+        max-width: 100%; /* Limit the maximum width to 90% of the viewport */
         margin: 0 auto; /* Center the overlay horizontally */
+        position: absolute;
+        width: 100%;
+        height: 100;
       }
       img.logo {
-        width: 120px;
+        width: 350px;
       }
       h1.headline {
-        font-size: 2.2rem;
+        font-size: 5.2rem;
+        padding: 1rem .5rem 0rem .5rem;
+
       }
       p.subheadline {
-        font-size: 1.2rem;
+        font-size: 4.1rem;
+        padding: 3.2rem 1.2rem;
       }
       .cta-link {
-        font-size: 1.1rem;
-        padding: 0.6rem 1.2rem;
+        font-size: 3rem;
+        padding: 1.5rem 1.2rem;
       }
       .video-background iframe {
         width: 100%;
@@ -194,31 +197,20 @@
   <div class="overlay">
     <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="logo" />
     <h1 class="headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
-    <p class="subheadline">Guiding divine entrepreneurs from vision to launch.</p>
+    <p class="subheadline">Guiding sacred entrepreneurs from vision to launch.</p>
     <a href="https://tally.so/r/wggaWd" target="_blank" class="cta-link">✨ Enter the Stargate ✨</a>
-  </div>
-  <div class="mobile-overlay">
-    <img src="cosmovision-logo.png" alt="Cosmovision Logo" class="mobile-logo" />
-    <h1 class="mobile-headline">A venture studio where sacred visions blossom into soulful enterprises.</h1>
-    <p class="mobile-subheadline">Guiding divine entrepreneurs from vision to launch.</p>
-    <a href="https://tally.so/r/wggaWd" target="_blank" class="mobile-cta-link">✨ Enter the Stargate ✨</a>
   </div>
   <script>
     window.addEventListener("load", () => {
       const iframe = document.querySelector('.video-background iframe');
       const overlay = document.querySelector('.overlay');
-      const mobileOverlay = document.querySelector('.mobile-overlay');
       // Delay video fade-in by 2 seconds
       setTimeout(() => {
         iframe.style.opacity = 1;
       }, 2000);
       // Fade in overlay content
       setTimeout(() => {
-        if (window.innerWidth > 768) {
-          overlay.style.opacity = 1;
-        } else {
-          mobileOverlay.style.opacity = 1;
-        }
+        overlay.style.opacity = 1;
       }, 1000);
     });
   </script>
